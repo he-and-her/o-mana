@@ -1,18 +1,15 @@
 defmodule OMana do
   @moduledoc """
-  Documentation for `OMana`.
+  Public, protocol-agnostic API over the orthogonal planes.
+  This is convenient for unit tests and future extension (HTTP, gRPC, etc.).
   """
 
-  @doc """
-  Hello world.
+  alias OMana.Command
 
-  ## Examples
+  @type ok :: :ok
+  @type err :: {:error, String.t()}
 
-      iex> OMana.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def call(storage, argv) when is_list(argv) do
+    Command.dispatch(storage, argv)
   end
 end
